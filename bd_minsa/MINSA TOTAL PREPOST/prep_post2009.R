@@ -2,7 +2,7 @@ source("/home/javier/Documentos/javier/bd_minsa/MINSA TOTAL PREPOST/spatcontrol/
 
 # cargamos la tabla de post2009
 setwd("/home/javier/Documentos/javier/bd_minsa/MINSA TOTAL PREPOST/resultados")
-post2009<-read.csv("cons_roc_2009_2015javier.csv",header=TRUE)
+post2009<-read.csv("cons_roc_2009_2015_CLAUDIA.csv",header=TRUE)
 
 # creamos una columna con nombre de tratadas para
 # que coincidan con la de UNION_ROCIADOS.csv
@@ -12,7 +12,7 @@ post2009$STATUS <- unlist("T")
 
 
 # cargamos la tabla de viv no rociadas
-post2009nr <- read.csv("viv_no_roc_Jav.csv")
+post2009nr <- read.csv("viv_no_roc_CLAU.csv")
 head (post2009nr)
 
 # creamos nuevas columas y le asignamos primero 0
@@ -27,6 +27,7 @@ post2009nr$Residual_R <- as.numeric(post2009nr$STATUS== "R")
 post2009nr$Residual_C <- as.numeric(post2009nr$STATUS == "C")
 post2009nr$Residual_D <- as.numeric(post2009nr$STATUS == "DES")
 post2009nr$Residual_LP <- as.numeric(post2009nr$STATUS == "LP")
+
 post2009nr$Residual_LV <- as.numeric(post2009nr$STATUS == "LV")
 
   
@@ -46,6 +47,6 @@ for(nombre in lqf){
 # Une las dos
 post2009completo<-rbind.general(post2009nr,post2009)
 # setwd("/home/javier/Documentos/javier/bd_minsa/MINSA TOTAL PREPOST/resultados")
-write.csv(post2009completo,"CONS_ROCIADO_2009_2015_con_cerradas.csv",row.names=FALSE)
+write.csv(post2009completo,"CONS_ROCIADO_2009_2015_con_cerradas_CLAUDIA.csv",row.names=FALSE)
 
 

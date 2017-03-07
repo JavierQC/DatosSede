@@ -262,13 +262,18 @@ library(stringr)
     C_R_D_LP <- merge(C_R_D,tdp_cnsldd, all = TRUE)
     C_R_D_LP_LV <-merge(C_R_D_LP,tdv_cnsldd, all = TRUE)
   
+#UNIENDO CON LOS REGISTROS OBTENIDOS DE LA BASE DEL MINSA 
+    cerrdas<-read.csv("~/Documentos/javier/bd_minsa/MINSA_CONTROL/CERRADAS_MINSA.csv")
+    C_R_D_LP_LV_1<-rbind(C_R_D_LP_LV,cerrdas)
+    
   #Obteniendo registros unicos
     C_R_D_LP_LV <- unique(C_R_D_LP_LV) # Todos los distritos de Arequipa
-  
+    C_R_D_LP_LV_1 <- unique(C_R_D_LP_LV_1)# Aumenatando  casas cerradas y renuentes de MINSA (FEB 2017)
 
   #Aplicando funcion filtro para obtener solo los datos del distrito ASA
    # statusMinsa<-filtro(C_R_D_LP_LV,dentro)
     statusMinsa <- C_R_D_LP_LV
+    statusMinsa <- C_R_D_LP_LV_1
   #Juntando con las tratadas    
     tratadas <- CONS_ROCIADO_2009_2015
     tratadas$STATUS <- unlist("T")
@@ -288,7 +293,7 @@ library(stringr)
 
     #Guardando informacion en una carpeta aparte
     setwd("/home/javier/Documentos/javier/bd_minsa/MINSA TOTAL PREPOST/resultados")
-    write.csv(CONS_ROCIADO_2009_2015,"cons_roc_2009_2015javier.csv", row.names = F)
-    write.csv(C_R_D_LP_LV, "viv_no_roc_Jav.csv", row.names = F) # archivo que servira para mas adelante
-    write.csv(statusMinsa,"statusMinsa2009_2015",row.names = F) # archivo con Cerradas, etc y Tratadas
+    write.csv(CONS_ROCIADO_2009_2015,"cons_roc_2009_2015_CLAUDIA.csv", row.names = F)
+    write.csv(C_R_D_LP_LV_1, "viv_no_roc_CLAU.csv", row.names = F) # archivo que servira para mas adelante
+    write.csv(statusMinsa,"statusMinsa2009_2015_CLAU",row.names = F) # archivo con Cerradas, etc y Tratadas
     

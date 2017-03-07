@@ -5,7 +5,7 @@ setwd("/home/javier/Documentos/javier/bd_minsa/MINSA TOTAL PREPOST/resultados")
 pre2009<-read.csv("UNION_ROCIADOS.csv",header=TRUE, sep=";")
 head(pre2009) 
 
-post2009<-read.csv("CONS_ROCIADO_2009_2015_con_cerradas.csv",header=TRUE)
+post2009<-read.csv("CONS_ROCIADO_2009_2015_con_cerradas_CLAUDIA.csv",header=TRUE)
 head(post2009)
 
 # Conversion de los "NULL" en 0
@@ -66,11 +66,11 @@ post2009$OV <- unlist(0)
 post2009$PE <- unlist(0)
 post2009$AV <- unlist(0)
 post2009$GA <- unlist(0)
-post2009$CU <- ifelse((post2009$TEC_CUY== 1 | post2009$PAT_CUY == 1),1,0)
+post2009$CU <- ifelse((post2009$TEC_CUY == 1 | post2009$PAT_CUY == 1), 1,0)
 post2009$CO <- ifelse((post2009$TEC_CON == 1 | post2009$PAT_CON == 1), 1,0)
 post2009$OV <- ifelse((post2009$TEC_OVE == 1 | post2009$PAT_OVE == 1), 1,0)
 post2009$PE <- ifelse((post2009$TEC_PER == 1 | post2009$PAT_PER == 1), 1,0)
-post2009$AV <- ifelse((post2009$TEC_AVE== 1 | post2009$PAT_AVE == 1), 1,0)
+post2009$AV <- ifelse((post2009$TEC_AVE == 1 | post2009$PAT_AVE == 1), 1,0)
 post2009$GA <- ifelse((post2009$TEC_GAT == 1 | post2009$PAT_GAT == 1), 1,0)
 
 # para verificar que solamente se obtenga valores diferentes de 0
@@ -191,9 +191,10 @@ prepost <- prepost[prepost$UNICODE != "1.4.41.",] # 1 registro elimado
 prepost <- prepost[prepost$UNICODE != "0.0.0.0",] # 2 registros eliminados
 prepost <- prepost[prepost$FR_A != "   -",] # 
 # prepost <- prepost[(prepost$UNICODE != "1.4.236.172" & prepost$PE_TRI != "0"),]
-prepostna <- prepost[!(is.na(prepost$P)& !(is.na(prepost$D) & !(is.na(prepost$L)))), ] # 1 registro eliminado
+
 # eliminando duplicados de la base general
 prepost <- prepost[!duplicated(prepost),]
+prepost <- prepost[!(is.na(prepost$P)), ] # 1 registro eliminado
 
 # -------------------------------------------------
 # PRIMER CICLO DE ROCIADO CERRO COLORADO
@@ -219,5 +220,5 @@ dupli_c2CC <- dupli_c2CC[order(dupli_c2CC$UNICODE),]
 duplicadosC2 <- ciclo2_CC[duplicated(ciclo2_CC),]
 
 # guardamos el archivo final como generalRociadoPA.csv
-write.csv(prepost,"generalRociadoPA_Javier_28feb17.csv",row.names=FALSE)
+write.csv(prepost,"generalRociadoPA_Javier07MAR2017.csv",row.names=FALSE)
 
