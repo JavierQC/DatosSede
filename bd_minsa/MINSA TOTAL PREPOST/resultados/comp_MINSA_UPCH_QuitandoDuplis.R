@@ -23,27 +23,9 @@ ciclo1_CC <- ciclo1_CC[(ciclo1_CC$L == 14 | ciclo1_CC$L == 15 | ciclo1_CC$L == 1
                         | ciclo1_CC$L == 20 | ciclo1_CC$L == 21 | ciclo1_CC$L == 24 | ciclo1_CC$L == 37
                         | ciclo1_CC$L == 40 | ciclo1_CC$L == 41 | ciclo1_CC$L == 43 | ciclo1_CC$L == 45
                         | ciclo1_CC$L == 47 | ciclo1_CC$L == 51 | ciclo1_CC$L == 52),]
-#UNICODE duplicados 1 ciclo
-indice_dupli <- ciclo1_CC[which(duplicated(ciclo1_CC$UNICODE)),1]
-dupli_c1CC<-ciclo1_CC[ciclo1_CC$UNICODE %in% indice_dupli,]
-#Ordenar
-dupli_c1CC <- dupli_c1CC[order(dupli_c1CC$UNICODE),]
-duplicadosC1 <- ciclo1_CC[duplicated(ciclo1_CC),]
-
-# UPCH db I ciclo
-ciclo1_UPCH <- read.csv("/home/javier/Documentos/github/Participation/merge_participacion/Cerro Colorado 2016/resultados/info_CC_1C_MOD.csv")
-
-c1_upch_T <- subset(ciclo1_UPCH, ESTA_CUANTIS == 1, select=c(UNICODE:ESTA_CUANTIS))
-c1_minsa_T <- subset(ciclo1_CC, Residual_T == 1, select=c(UNICODE,Residual_T))
-
-# comnparacion entre las tratadas de cada base
-SiM_NoU <- as.data.frame(setdiff(c1_minsa_T$UNICODE,c1_upch_T$UNICODE)) #117
-SiU_NoM <- as.data.frame(setdiff(c1_upch_T$UNICODE,c1_minsa_T$UNICODE)) #5
-intersection <- intersect(c1_minsa_T$UNICODE,c1_upch_T$UNICODE)
 
 # Viviendas que tienen duplicados en base MINSA por UNICODE pero
 # que se diferencian en uno o dos campos, las eliminamos
-
 ciclo1_CC <- ciclo1_CC[-which("1.4.14.389"==ciclo1_CC$UNICODE & "ANGEL CALSIN CALATAYO"==ciclo1_CC$JEFEVIV),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.14.216A"==ciclo1_CC$UNICODE & "Es pintura esmalte"==ciclo1_CC$NOTAS),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.15.18"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
@@ -61,6 +43,7 @@ ciclo1_CC <- ciclo1_CC[-which("1.4.16.61"==ciclo1_CC$UNICODE & "SABRINA ARRATIA 
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.129"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.129"==ciclo1_CC$UNICODE & 14==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.129"==ciclo1_CC$UNICODE & "HERNAN ALVELDANO BERNEDO"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138"==ciclo1_CC$UNICODE & 1==ciclo1_CC$NUMRES),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.140"==ciclo1_CC$UNICODE & 13==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.140"==ciclo1_CC$UNICODE & 15==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.140"==ciclo1_CC$UNICODE & "MAGALY ARCATA QUICO"==ciclo1_CC$JEFEVIV),]
@@ -70,19 +53,25 @@ ciclo1_CC <- ciclo1_CC[-which("1.4.16.196"==ciclo1_CC$UNICODE & "RENZO CHAVEZ"==
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.212"==ciclo1_CC$UNICODE & 14==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.212"==ciclo1_CC$UNICODE & 18==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.214"==ciclo1_CC$UNICODE & "GENOVEVA QUISOPE MAMANI"==ciclo1_CC$JEFEVIV),]
-ciclo1_CC <- ciclo1_CC[-which("1.4.16.389"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.389"==ciclo1_CC$UNICODE & "T"==ciclo1_CC$STATUS),]
 # ciclo1_CC <- ciclo1_CC[-which("1.4.16.251"==ciclo1_CC$UNICODE & "No se rociĂ³ 1 dormitorio por motivo de salud"==ciclo1_CC$NOTAS),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.452"==ciclo1_CC$UNICODE & "LUCY LINARES DE ROMAN"==ciclo1_CC$JEFEVIV),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.476"==ciclo1_CC$UNICODE & "MARIA VASQUEZ"==ciclo1_CC$ROCIADOR),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.129A"==ciclo1_CC$UNICODE & 14==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.129A"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138B"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138C"==ciclo1_CC$UNICODE),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138D"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138E"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138F"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138G"==ciclo1_CC$UNICODE),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138H"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138I"==ciclo1_CC$UNICODE),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138J"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138K"==ciclo1_CC$UNICODE),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138L"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.138M"==ciclo1_CC$UNICODE),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.138N"==ciclo1_CC$UNICODE),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.151A"==ciclo1_CC$UNICODE & ""==ciclo1_CC$PE_GRI),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.211A"==ciclo1_CC$UNICODE & 14==ciclo1_CC$FR_D),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.16.211A"==ciclo1_CC$UNICODE & 18==ciclo1_CC$FR_D),]
@@ -93,7 +82,70 @@ ciclo1_CC <- ciclo1_CC[-which("1.4.20.226"==ciclo1_CC$UNICODE & "R"==ciclo1_CC$S
 ciclo1_CC <- ciclo1_CC[-which("1.4.20.264"==ciclo1_CC$UNICODE & "R"==ciclo1_CC$STATUS),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.21.279A"==ciclo1_CC$UNICODE & "D"==ciclo1_CC$STATUS),]
 ciclo1_CC <- ciclo1_CC[-which("1.4.24.87"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.90"==ciclo1_CC$UNICODE & 10==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.90"==ciclo1_CC$UNICODE & ""==ciclo1_CC$NOTAS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.100"==ciclo1_CC$UNICODE & 9==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.85A"==ciclo1_CC$UNICODE & 6==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.87A"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.87A"==ciclo1_CC$UNICODE & "JEFERSON CORA HUANCA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.87B"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.87B"==ciclo1_CC$UNICODE & "MARCIA HUANCA CANASA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.24.87C"==ciclo1_CC$UNICODE & 12==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.40.83"==ciclo1_CC$UNICODE & 26==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.40.91"==ciclo1_CC$UNICODE & "LUCRESIA QUISPE"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.40.172"==ciclo1_CC$UNICODE & "ISABEL SIHINCHA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.40.346"==ciclo1_CC$UNICODE & "MARAGARITA VARGAS NAYHUA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.41.285"==ciclo1_CC$UNICODE & ""==ciclo1_CC$NOTAS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.41.313"==ciclo1_CC$UNICODE & "SILVIA DE CAHUNA CONDORI"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.41.414"==ciclo1_CC$UNICODE & "PATRICIA SOTOMAYOR MNOROY"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.45.138"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.45.139"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.47.331"==ciclo1_CC$UNICODE & "R"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.47.698"==ciclo1_CC$UNICODE & "MARTHA QUICANIO RAMOERO"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.47.908"==ciclo1_CC$UNICODE & "R"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.47.1122"==ciclo1_CC$UNICODE & "LUZMILA ROQUE VDA. DE PEREZ"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.47.882B"==ciclo1_CC$UNICODE & "KELLY MACHACA CATACOA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.7"==ciclo1_CC$UNICODE & "ALBERTO CHINCHILLA"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.42"==ciclo1_CC$UNICODE & 9==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.42"==ciclo1_CC$UNICODE & ""==ciclo1_CC$PE_GRI),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.43"==ciclo1_CC$UNICODE & 9==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.51"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.64"==ciclo1_CC$UNICODE & "DARIA ZAMBRRANO FLORES"==ciclo1_CC$JEFEVIV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.75"==ciclo1_CC$UNICODE & 16==ciclo1_CC$FR_D),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.87"==ciclo1_CC$UNICODE & "Ladrillo"==ciclo1_CC$PE_MAT),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.51.53A"==ciclo1_CC$UNICODE & "C"==ciclo1_CC$STATUS),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.52.38"==ciclo1_CC$UNICODE & "Madera"==ciclo1_CC$IN_MAT),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.52.39"==ciclo1_CC$UNICODE & 0==ciclo1_CC$AV),]
+ciclo1_CC <- ciclo1_CC[-which("1.4.52.40"==ciclo1_CC$UNICODE & 1==ciclo1_CC$PE_AMB),]
 
 
 
-write.csv(ciclo1_CC,"iCICLO.csv", row.names = F)
+
+#UNICODE duplicados 1 ciclo
+indice_dupli <- ciclo1_CC[which(duplicated(ciclo1_CC$UNICODE)),1]
+dupli_c1CC<-ciclo1_CC[ciclo1_CC$UNICODE %in% indice_dupli,]
+#Ordenar
+dupli_c1CC <- dupli_c1CC[order(dupli_c1CC$UNICODE),]
+duplicadosC1 <- ciclo1_CC[duplicated(ciclo1_CC),]
+
+# UPCH db I ciclo
+ciclo1_UPCH <- read.csv("/home/javier/Documentos/github/Participation/merge_participacion/Cerro Colorado 2016/resultados/info_CC_1C_MOD.csv")
+
+c1_upch_T <- subset(ciclo1_UPCH, ESTA_CUANTIS == 1, select=c(UNICODE:ESTA_CUANTIS))
+c1_minsa_T <- subset(ciclo1_CC, Residual_T == 1, select=c(UNICODE,Residual_T))
+
+# comnparacion entre las tratadas de cada base
+SiM_NoU <- as.data.frame(setdiff(c1_minsa_T$UNICODE,c1_upch_T$UNICODE)) #14
+SiU_NoM <- as.data.frame(setdiff(c1_upch_T$UNICODE,c1_minsa_T$UNICODE)) #5
+intersection <- intersect(c1_minsa_T$UNICODE,c1_upch_T$UNICODE) #1667
+
+# corrigiendo errores de tipeo de parte del MINSA
+ciclo1_CC[ciclo1_CC$UNICODE=="1.4.47.922" & ciclo1_CC$STATUS=="T",c(46,4)] <- c("1.4.47.922A","922A")
+ciclo1_CC <- ciclo1_CC[-which("1.4.16.151"==ciclo1_CC$UNICODE),]
+ciclo1_CC[ciclo1_CC$UNICODE=="1.4.16.151A" & ciclo1_CC$STATUS=="T",c(46,4)] <- c("1.4.16.151",151)
+
+
+
+
+# salvando resultados
+write.csv(ciclo1_CC,"iCICLO_9mar17.csv", row.names = F)
